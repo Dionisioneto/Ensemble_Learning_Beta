@@ -1,0 +1,5 @@
+[covariates_Brazil_census2010]
+
+link: http://www.atlasbrasil.org.br/acervo/biblioteca
+access: 09/01/2024 (September) 
+
