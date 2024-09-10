@@ -7,13 +7,11 @@
 ## Bibliotecas
 
 if(!require(pacman)) install.packages("pacman"); library(pacman)
-p_load(ggplot2,dplyr,geobr, ggplot2, sf,rio,readr)
+p_load(ggplot2,dplyr,geobr, sf,rio,readr)
 
 ## 1st step: Loading data
 
-setwd("C:/Users/dioni/OneDrive - University of São Paulo/Doutorado em Estatística/2023.2/2 - Aprendizado de Máquina Estatístico/artigo_publicar/github_content/Data")
-
-cadu = read.csv2("final_data.csv")
+cadu = read.csv2("https://raw.githubusercontent.com/Dionisioneto/Ensemble_Learning_Beta/master/Data/final_data.csv")
 head(cadu)
 dim(cadu)
 
@@ -22,10 +20,15 @@ dim(cadu)
 ## das preditoras
 ## ---
 
-preditoras = cadu %>% subset(select=-c(codigo_ibge,tax,
-                            UF, Município, latitude,
-                            longitude, codigo_uf,siafi_id,
-                            ddd, fuso_horario,capital))
+preditoras = cadu %>% subset(select=c(ESPVIDA,FECTOT, RAZDEP,
+                                     E_ANOSESTUDO, T_ANALF18M,
+                                     T_FBBAS, T_FBFUND,
+                                     T_FBMED, T_FBSUPER,T_MED18M, T_SUPER25M,
+                                     GINI, PIND, PPOB, RDPC1, RDPCT,
+                                     THEIL, T_BANAGUA, T_DENS,
+                                     T_LIXO, T_LUZ,AGUA_ESGOTO,
+                                     T_M10A14CF, T_M15A17CF,
+                                     I_ESCOLARIDADE,  IDHM, IDHM_L, IDHM_R))
 
 head(preditoras)
 
@@ -102,10 +105,21 @@ ggplot() +
   labs(title="",
        size=8)+
   scale_fill_distiller(palette = "RdPu", limits=c(0.3, 1),
-                       name="Rate of beneficiaries",direction = 1)+
+                       name="Update rate \n",direction = 1)+
   theme_minimal() 
 
-## vendo os municipios para treino e teste
+
+
+## map to visualize the train and test data
+
+set.seed(10) ## for reproducibility
+
+# Training proportion
+prop_treino = 0.8
+n_treino = round(nrow(cadu) * prop_treino)
+
+ind_treino = sample(1:nrow(cadu), n_treino)
+
 
 
 maptrain = ggplot() +
