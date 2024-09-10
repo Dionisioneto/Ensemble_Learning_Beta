@@ -3,3 +3,8 @@
 link: http://www.atlasbrasil.org.br/acervo/biblioteca
 access: 09/01/2024 (September) 
 
+[data_cad_unico]
+
+link: https://dados.gov.br/dados/conjuntos-dados/familias-por-faixa-de-renda-com-cadastro-atualizado-no-cadastro-unico
+access: 09/01/2024 (September) 
+target: "cadun_taxa_atualizacao_cadastral_d: Taxa geral de atualização cadastral".
